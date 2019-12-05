@@ -1,10 +1,9 @@
-import {isURLInList} from '../utils/url';
+import {compareURLPatterns, isURLInList} from '../utils/url';
 import {createTextStyle} from './text-style';
 import {formatSitesFixesConfig} from './utils/format';
 import {applyColorMatrix, createFilterMatrix} from './utils/matrix';
 import {parseSitesFixesConfig} from './utils/parse';
-import {parseArray, formatArray} from '../utils/text';
-import {compareURLPatterns} from '../utils/url';
+import {formatArray, parseArray} from '../utils/text';
 import {FilterConfig, StaticTheme} from '../definitions';
 
 interface ThemeColors {
@@ -47,6 +46,33 @@ const lightTheme: ThemeColors = {
     fadeText: [0, 0, 0, 0.5],
 };
 
+const solarizedDarkTheme: ThemeColors = {
+    neutralBg: [0, 43, 54],
+    neutralText: [131, 148, 150],
+    redBg: [0, 43, 54],
+    redText: [220, 50, 47],
+    greenBg: [0, 43, 54],
+    greenText: [133, 153, 0],
+    blueBg: [0, 43, 54],
+    blueText: [38, 139, 210],
+    fadeBg: [7, 54, 66],
+    fadeText: [147, 161, 161],
+};
+
+
+const solarizedLightTheme: ThemeColors = {
+    neutralBg: [253, 246, 227],
+    neutralText: [101, 123, 131],
+    redBg: [253, 246, 227],
+    redText: [220, 50, 47],
+    greenBg: [253, 246, 227],
+    greenText: [133, 153, 0],
+    blueBg: [253, 246, 227],
+    blueText: [38, 139, 210],
+    fadeBg: [238, 232, 213],
+    fadeText: [88, 110, 117],
+};
+
 function rgb([r, g, b, a]: number[]) {
     if (typeof a === 'number') {
         return `rgba(${r}, ${g}, ${b}, ${a})`;
@@ -59,7 +85,7 @@ function mix(color1: number[], color2: number[], t: number) {
 }
 
 export default function createStaticStylesheet(config: FilterConfig, url: string, frameURL: string, staticThemes: StaticTheme[]) {
-    const srcTheme = config.mode === 1 ? darkTheme : lightTheme;
+    const srcTheme = config.solarized ? config.mode === 1 ? solarizedDarkTheme : solarizedLightTheme : config.mode === 1 ? darkTheme : lightTheme;
     const theme = Object.entries(srcTheme).reduce((t, [prop, color]) => {
         t[prop] = applyColorMatrix(color, createFilterMatrix({...config, mode: 0}));
         return t;

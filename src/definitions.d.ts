@@ -47,6 +47,7 @@ export interface FilterConfig {
     textStroke: number;
     engine: string;
     stylesheet: string;
+    solarized: boolean;
 }
 
 export interface CustomSiteConfig {

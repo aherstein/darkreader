@@ -8,6 +8,7 @@ import {isURLInList} from '../../../../utils/url';
 import {compileMarkdown} from '../../utils/markdown';
 import {getLocalMessage} from '../../../../utils/locales';
 import {ExtWrapper, FilterConfig, TabInfo} from '../../../../definitions';
+import SolarizedSwitch from "../solarized-switch";
 
 export default function MoreSettings({data, actions, tab}: ExtWrapper & {tab: TabInfo}) {
 
@@ -33,6 +34,7 @@ export default function MoreSettings({data, actions, tab}: ExtWrapper & {tab: Ta
                     {compileMarkdown(getLocalMessage('try_experimental_theme_engines'))}
                 </p>}
                 <EngineSwitch engine={filterConfig.engine} onChange={(engine) => setConfig({engine})} />
+                <SolarizedSwitch config={filterConfig} onChange={setConfig} />
             </div>
             <div class="more-settings__section">
                 <CustomSettingsToggle data={data} tab={tab} actions={actions} />

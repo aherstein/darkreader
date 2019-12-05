@@ -22,6 +22,7 @@ export default class UserStorage {
                 textStroke: 0,
                 engine: ThemeEngines.dynamicTheme,
                 stylesheet: '',
+                solarized: false,
             },
             customThemes: [],
             siteList: [],
@@ -152,6 +153,7 @@ export default class UserStorage {
                 textStroke: f.textStroke,
                 engine: f.engine,
                 stylesheet: f.stylesheet,
+                solarized: false
             };
         }
 

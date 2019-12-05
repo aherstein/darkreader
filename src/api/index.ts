@@ -1,5 +1,5 @@
 import './chrome';
-import {FilterConfig as Theme, DynamicThemeFix} from '../definitions';
+import {DynamicThemeFix, FilterConfig as Theme} from '../definitions';
 import ThemeEngines from '../generators/theme-engines';
 import {createOrUpdateDynamicTheme, removeDynamicTheme} from '../inject/dynamic-theme';
 
@@ -14,6 +14,7 @@ const defaultTheme: Theme = {
     textStroke: 0,
     engine: ThemeEngines.dynamicTheme,
     stylesheet: '',
+    solarized: false,
 };
 
 export function enable(themeOptions: Partial<Theme>, fixes: DynamicThemeFix = null, isIFrame = false) {
