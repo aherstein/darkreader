@@ -3,17 +3,19 @@ import {FilterConfig} from '../../definitions';
 
 export function createFilterMatrix(config: FilterConfig) {
     let m = Matrix.identity();
-    if (config.sepia !== 0) {
-        m = multiplyMatrices(m, Matrix.sepia(config.sepia / 100));
-    }
-    if (config.grayscale !== 0) {
-        m = multiplyMatrices(m, Matrix.grayscale(config.grayscale / 100));
-    }
-    if (config.contrast !== 100) {
-        m = multiplyMatrices(m, Matrix.contrast(config.contrast / 100));
-    }
-    if (config.brightness !== 100) {
-        m = multiplyMatrices(m, Matrix.brightness(config.brightness / 100));
+    if (!config.solarized) {
+        if (config.sepia !== 0) {
+            m = multiplyMatrices(m, Matrix.sepia(config.sepia / 100));
+        }
+        if (config.grayscale !== 0) {
+            m = multiplyMatrices(m, Matrix.grayscale(config.grayscale / 100));
+        }
+        if (config.contrast !== 100) {
+            m = multiplyMatrices(m, Matrix.contrast(config.contrast / 100));
+        }
+        if (config.brightness !== 100) {
+            m = multiplyMatrices(m, Matrix.brightness(config.brightness / 100));
+        }
     }
     if (config.mode === 1) {
         m = multiplyMatrices(m, Matrix.invertNHue());
